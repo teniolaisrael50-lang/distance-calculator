@@ -1,0 +1,5 @@
+Latitude and longitude are numbers used to describe the position of a place on Earth. Latitude shows how far a place is north or south of the Equator. It ranges from -90 to 90. Positive values mean the place is in the northern part of the Earth, while negative values mean it is in the southern part.
+
+Longitude shows how far a place is east or west of the Prime Meridian. It ranges from -180 to 180. Positive values mean the place is to the east, while negative values mean it is to the west.
+
+These coordinates help us locate any place on Earth accurately. In this program, latitude and longitude are used as input values to calculate the distance between two points.
