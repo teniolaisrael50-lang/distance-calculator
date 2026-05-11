@@ -1,19 +1,47 @@
-# get numbers from user
-lat1 = float(input("Enter start latitude: "))
-lon1 = float(input("Enter start longitude: "))
-lat2 = float(input("Enter end latitude: "))
-lon2 = float(input("Enter end longitude: "))
+import math
+ 
+#_latitude
+def valid_latitude(lat):
+    return -90 <= lat <= 90
+#_longitude
+def valid_longitude(lon):
+    return -180 <= lon <= 180
 
-# check if values are valid
-if lat1 < -90 or lat1 > 90 or lat2 < -90 or lat2 > 90:
-    print("Invalid latitude! Must be between -90 and 90")
+while True:
+    lat1 = float(input("Enter start latitude: "))
 
-elif lon1 < -180 or lon1 > 180 or lon2 < -180 or lon2 > 180:
-    print("Invalid longitude! Must be between -180 and 180")
+    if valid_latitude(lat1):
+        break
+    else:
+        print("Invalid latitude! Must be between -90 and 90")
 
-else:
-    # calculate distance
-    distance = ((lat2 - lat1) ** 2 + (lon2 - lon1) ** 2) ** 0.5
+while True:
+    lon1 = float(input("Enter start longitude: "))
 
-    # print result
-    print(f"Distance is: {distance:.4f}")
+    if valid_longitude(lon1):
+        break
+    else:
+        print("Invalid longitude! Must be between -180 and 180")
+
+while True:
+    lat2 = float(input("Enter end latitude: "))
+
+    if valid_latitude(lat2):
+        break
+    else:
+        print("Invalid latitude! Must be between -90 and 90")
+
+while True:
+    lon2 = float(input("Enter end longitude: "))
+
+    if valid_longitude(lon2):
+        break
+    else:
+        print("Invalid longitude! Must be between -180 and 180")
+
+
+# Distance formula
+distance = math.sqrt((lat2 - lat1)**2 + (lon2 - lon1)**2)
+
+
+print(f"Distance: {distance} km")
