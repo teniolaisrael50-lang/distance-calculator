@@ -1,47 +1,70 @@
+# Import math 
 import math
- 
-#_latitude
-def valid_latitude(lat):
-    return -90 <= lat <= 90
-#_longitude
-def valid_longitude(lon):
-    return -180 <= lon <= 180
 
-while True:
-    lat1 = float(input("Enter start latitude: "))
+# Function to check if latitude is valid
+def valid_latitude(latitude):
+    return -90 <= latitude <= 90
 
-    if valid_latitude(lat1):
-        break
-    else:
-        print("Invalid latitude! Must be between -90 and 90")
+# Function to check if longitude is valid
+def valid_longitude(longitude):
+    return -180 <= longitude <= 180
 
-while True:
-    lon1 = float(input("Enter start longitude: "))
+# Function to collect valid latitude from user
+def get_latitude(message):
+    while True:
+        try:
+            latitude = float(input(message))
 
-    if valid_longitude(lon1):
-        break
-    else:
-        print("Invalid longitude! Must be between -180 and 180")
+           
+            if valid_latitude(latitude):
+                return latitude
+            else:
+                print("Invalid latitude! Must be between -90 and 90")
 
-while True:
-    lat2 = float(input("Enter end latitude: "))
+        # Handle error if user enters text instead of number
+        except ValueError:
+            print("Please enter a valid number")
 
-    if valid_latitude(lat2):
-        break
-    else:
-        print("Invalid latitude! Must be between -90 and 90")
+# Function to collect valid longitude from user
+def get_longitude(message):
+    while True:
+        try:
+            longitude = float(input(message))
 
-while True:
-    lon2 = float(input("Enter end longitude: "))
+            # Check if longitude is within valid range
+            if valid_longitude(longitude):
+                return longitude
+            else:
+                print("Invalid longitude! Must be between -180 and 180")
 
-    if valid_longitude(lon2):
-        break
-    else:
-        print("Invalid longitude! Must be between -180 and 180")
+        # Handle error if user enters text instead of number
+        except ValueError:
+            print("Please enter a valid number")
 
+# Collect user inputs
+lat1 = get_latitude("Enter start latitude: ")
+lon1 = get_longitude("Enter start longitude: ")
+lat2 = get_latitude("Enter end latitude: ")
+lon2 = get_longitude("Enter end longitude: ")
 
-# Distance formula
-distance = math.sqrt((lat2 - lat1)**2 + (lon2 - lon1)**2)
+# Convert latitude and longitude from degrees to radians
+lat1 = math.radians(lat1)
+lon1 = math.radians(lon1)
+lat2 = math.radians(lat2)
+lon2 = math.radians(lon2)
 
+#  calculations
+dlat = lat2 - lat1
+dlon = lon2 - lon1
 
-print(f"Distance: {distance} km")
+a = math.sin(dlat / 2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2)**2
+c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+
+# Radius of Earth in kilometers
+radius = 6371
+
+# Calculate distance
+distance = radius * c
+
+# Display result
+print(f"The distance is {distance:.2f} km")
